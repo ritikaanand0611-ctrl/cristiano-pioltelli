@@ -380,7 +380,7 @@ export default function LookbookShell() {
                 className="absolute bottom-0 left-[50%] w-[44%] h-[95%] mix-blend-multiply"
                 style={{ transformOrigin: "center center", cursor: offset !== 0 ? "pointer" : undefined }}
                 animate={getRunwayStyle(i, activeIndex, isMobile)}
-                transition={{ type: "spring", stiffness: 220, damping: 30, mass: 1 }}
+                transition={{ type: "spring", stiffness: 150, damping: 22, mass: 1.2 }}
                 onClick={() => offset !== 0 && goTo(i)}
               >
                 {l.imagePath ? (
