@@ -410,6 +410,12 @@ export default function LookbookShell() {
             );
           })}
 
+        {/* ── Mobile text veil: fades runway bg over text zone so copy is legible */}
+        <div
+          className="absolute inset-y-0 left-0 w-[52%] z-[65] pointer-events-none md:hidden"
+          style={{ background: "linear-gradient(to right, #DAE4EE 55%, transparent)" }}
+        />
+
         {/* ── Invisible drag overlay — above models (max z:60), below UI (z:80+) */}
         <motion.div
           className="absolute inset-0 z-[70] cursor-grab active:cursor-grabbing"
@@ -420,7 +426,7 @@ export default function LookbookShell() {
         />
 
         {/* ── Top-left overlay: season + description ─────────────────────── */}
-        <div className="absolute top-10 left-0 z-[80] w-[55%] md:w-full pl-4 md:pl-10 md:max-w-[22ch] pointer-events-none select-none">
+        <div className="absolute top-8 left-0 z-[80] w-[50%] md:w-auto pl-4 md:pl-10 md:max-w-[22ch] pointer-events-none select-none">
           <AnimatePresence mode="wait">
             <motion.div
               key={look.id + "-tl"}
