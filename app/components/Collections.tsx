@@ -5,6 +5,7 @@ const COLLECTIONS = [
     caption: "Layered with intention",
     image: "/images_hero/look-06-pastoral-edge.png",
     large: true,
+    href: "/clothing?category=Outerwear",
   },
   {
     id: "c2",
@@ -12,6 +13,7 @@ const COLLECTIONS = [
     caption: "Warmth, redefined",
     image: "/images_hero/look-04-earthen-layers.png",
     large: false,
+    href: "/clothing?category=Knitwear",
   },
   {
     id: "c3",
@@ -19,6 +21,7 @@ const COLLECTIONS = [
     caption: "The finishing note",
     image: "/images_hero/look-01-nomadic-rose.png",
     large: false,
+    href: "/accessories",
   },
 ];
 
@@ -56,7 +59,7 @@ export default function Collections() {
 function CollectionTile({ item, className }: { item: typeof COLLECTIONS[number]; className?: string }) {
   return (
     <a
-      href="/collections"
+      href={item.href}
       className={[
         "relative overflow-hidden bg-[#E8E2D9] group cursor-pointer block",
         "h-[60vw] md:h-auto",

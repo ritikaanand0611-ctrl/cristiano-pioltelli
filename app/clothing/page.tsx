@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { Suspense, useState, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import FilterBar from "@/app/components/FilterBar";
@@ -11,14 +12,21 @@ const CATEGORIES = [
   "All",
   "Dresses",
   "Outerwear",
+  "Knitwear",
   "Tops",
   "Blazers",
   "Co-ords",
   "Trousers",
 ];
 
-export default function ClothingPage() {
-  const [activeFilter, setActiveFilter] = useState("All");
+function ClothingContent() {
+  const searchParams = useSearchParams();
+  const initialCategory = (() => {
+    const param = searchParams.get("category");
+    return param && CATEGORIES.includes(param) ? param : "All";
+  })();
+
+  const [activeFilter, setActiveFilter] = useState(initialCategory);
 
   const filtered = useMemo(
     () =>
@@ -75,5 +83,13 @@ export default function ClothingPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function ClothingPage() {
+  return (
+    <Suspense>
+      <ClothingContent />
+    </Suspense>
   );
 }
