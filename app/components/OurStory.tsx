@@ -19,7 +19,7 @@ export default function OurStory() {
             Each piece begins with a conversation between fabric and form.
           </p>
           <p className="font-sans text-[0.88rem] leading-relaxed text-zinc-500 max-w-[42ch] mb-10">
-            Our ateliers in Milan and Jaipur bring together master weavers,
+            Our atelier in Pavia brings together master weavers,
             natural dyes, and contemporary pattern-cutting to produce garments
             that outlast every season.
           </p>

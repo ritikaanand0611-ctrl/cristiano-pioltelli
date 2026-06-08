@@ -27,7 +27,7 @@ export default function Footer() {
               Cristiano Pioltelli
             </p>
             <p className="font-sans text-[0.78rem] leading-relaxed text-white/35 max-w-[28ch]">
-              Modern silhouettes rooted in artisanal heritage. Milan · Jaipur · New York.
+              Modern silhouettes rooted in artisanal heritage. Based in Pavia, Italy.
             </p>
           </div>
 
