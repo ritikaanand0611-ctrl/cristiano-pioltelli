@@ -187,22 +187,38 @@ function computeOffset(index: number, activeIndex: number): number {
   return offset;
 }
 
-function getRunwayStyle(index: number, activeIndex: number) {
+function getRunwayStyle(index: number, activeIndex: number, isMobile: boolean) {
   const offset = computeOffset(index, activeIndex);
-  // center-origin + slight positive-y shift per step traces the converging
-  // vanishing-point perspective the user's orange lines indicate.
+
+  if (isMobile) {
+    if (offset === 0) {
+      return { x: "0vw",   y: "0%",   scale: 1.00, opacity: 1,   filter: "blur(0px)",   zIndex: 50 };
+    } else if (offset === -1) {
+      return { x: "-22vw", y: "3%",   scale: 0.75, opacity: 0.9, filter: "blur(2.5px)", zIndex: 40 };
+    } else if (offset === -2) {
+      return { x: "-38vw", y: "6%",   scale: 0.55, opacity: 0.7, filter: "blur(6px)",   zIndex: 30 };
+    } else if (offset === -3) {
+      return { x: "-48vw", y: "9%",   scale: 0.40, opacity: 0.4, filter: "blur(10px)",  zIndex: 20 };
+    } else if (offset > 0) {
+      return { x: "60vw",  y: "0%",   scale: 1.00, opacity: 0,   filter: "blur(0px)",   zIndex: 60 };
+    } else {
+      return { x: "-55vw", y: "12%",  scale: 0.25, opacity: 0,   filter: "blur(14px)",  zIndex: 10 };
+    }
+  }
+
+  // Desktop
   if (offset === 0) {
-    return { x: "5vw",   y: "0%",  scale: 1.00, opacity: 1,   filter: "blur(0px)",  zIndex: 50 };
+    return { x: "5vw",   y: "0%",  scale: 1.00, opacity: 1,   filter: "blur(0px)",   zIndex: 50 };
   } else if (offset === -1) {
-    return { x: "-12vw", y: "2%",  scale: 0.82, opacity: 0.9, filter: "blur(2.5px)", zIndex: 40 };
+    return { x: "-12vw", y: "2%",  scale: 0.72, opacity: 0.9, filter: "blur(2.5px)", zIndex: 40 };
   } else if (offset === -2) {
-    return { x: "-26vw", y: "4%",  scale: 0.62, opacity: 0.7, filter: "blur(6px)",  zIndex: 30 };
+    return { x: "-26vw", y: "4%",  scale: 0.48, opacity: 0.7, filter: "blur(6px)",   zIndex: 30 };
   } else if (offset === -3) {
-    return { x: "-36vw", y: "6%",  scale: 0.42, opacity: 0.4, filter: "blur(10px)", zIndex: 20 };
+    return { x: "-36vw", y: "6%",  scale: 0.28, opacity: 0.4, filter: "blur(10px)",  zIndex: 20 };
   } else if (offset > 0) {
-    return { x: "50vw",  y: "0%",  scale: 1.00, opacity: 0,   filter: "blur(0px)",  zIndex: 60 };
+    return { x: "50vw",  y: "0%",  scale: 1.00, opacity: 0,   filter: "blur(0px)",   zIndex: 60 };
   } else {
-    return { x: "-42vw", y: "8%",  scale: 0.22, opacity: 0,   filter: "blur(14px)", zIndex: 10 };
+    return { x: "-42vw", y: "8%",  scale: 0.14, opacity: 0,   filter: "blur(14px)",  zIndex: 10 };
   }
 }
 
@@ -227,6 +243,16 @@ export default function LookbookShell() {
     const next = ((n % LOOKS.length) + LOOKS.length) % LOOKS.length;
     activeIndexRef.current = next;
     setActiveIndex(next);
+  }, []);
+
+  // Mobile breakpoint detection (matches Tailwind's md: 768px)
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
   }, []);
 
   // Measure left pane so card widths are pixel-perfect
@@ -304,15 +330,15 @@ export default function LookbookShell() {
 
       <Header right={lookCounter} />
 
-      {/* 70/30 split */}
-      <main className="flex flex-1 overflow-hidden">
+      {/* 70/30 split — stacks vertically on mobile */}
+      <main className="flex flex-col md:flex-row w-full min-h-0 flex-1 overflow-hidden">
 
       {/* ══════════════════════════════════════════════════════════════════════
           LEFT PANE — The Runway  (70 %)
           ══════════════════════════════════════════════════════════════════════ */}
       <motion.div
         ref={paneRef}
-        className="relative w-[70%] h-full flex items-center justify-center overflow-hidden select-none bg-[#DAE4EE]"
+        className="relative w-full md:w-[70%] h-[70vh] md:h-full flex items-center justify-center overflow-hidden select-none bg-[#DAE4EE]"
       >
         {/* ── Models ─────────────────────────────────────────────────────── */}
         {paneW > 0 &&
@@ -327,8 +353,8 @@ export default function LookbookShell() {
               teleportingRight ? `${l.id}-tpr${activeIndex}` :
               l.id;
             const itemInitial =
-              teleportingLeft  ? { x: "-42vw", y: "8%", scale: 0.22, opacity: 0 } :
-              teleportingRight ? { x: "50vw",  y: "0%", scale: 1.00, opacity: 0 } :
+              teleportingLeft  ? { x: isMobile ? "-55vw" : "-42vw", y: isMobile ? "12%" : "8%", scale: isMobile ? 0.25 : 0.14, opacity: 0 } :
+              teleportingRight ? { x: isMobile ? "60vw"  : "50vw",  y: "0%", scale: 1.00, opacity: 0 } :
               false;
 
             return (
@@ -337,7 +363,7 @@ export default function LookbookShell() {
                 initial={itemInitial}
                 className="absolute bottom-0 left-[50%] w-[44%] h-[95%] mix-blend-multiply"
                 style={{ transformOrigin: "center center", cursor: offset !== 0 ? "pointer" : undefined }}
-                animate={getRunwayStyle(i, activeIndex)}
+                animate={getRunwayStyle(i, activeIndex, isMobile)}
                 transition={{ type: "spring", stiffness: 220, damping: 30, mass: 1 }}
                 onClick={() => offset !== 0 && goTo(i)}
               >
@@ -438,8 +464,8 @@ export default function LookbookShell() {
           </nav>
         </div>
 
-        {/* ── Bottom-right: arrow controls ────────────────────────────────── */}
-        <div className="absolute bottom-10 right-10 z-[80] flex gap-3">
+        {/* ── Bottom-right: arrow controls — hidden on mobile (swipe instead) */}
+        <div className="absolute bottom-10 right-10 z-[80] hidden md:flex gap-3">
           <button
             onClick={() => goTo(activeIndexRef.current + 1)}
             aria-label="Previous look"
@@ -468,9 +494,9 @@ export default function LookbookShell() {
       {/* ══════════════════════════════════════════════════════════════════════
           RIGHT PANE — Outfit Breakdown  (30 %)
           ══════════════════════════════════════════════════════════════════════ */}
-      <div className="w-[30%] h-full flex flex-col border-l border-[#DDD5C8] bg-white overflow-hidden">
+      <div className="w-full md:w-[30%] h-auto md:h-full flex flex-col border-t md:border-t-0 md:border-l border-[#DDD5C8] bg-white overflow-hidden">
 
-        <div className="flex-1 overflow-y-auto px-10 pt-8">
+        <div className="flex-1 overflow-y-auto px-10 pt-8 md:pt-8">
           <p className="font-sans text-[8.5px] font-bold tracking-[0.44em] text-[#2C2A29]/60 uppercase mb-7">
             Outfit Breakdown
           </p>
