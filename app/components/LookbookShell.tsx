@@ -531,6 +531,11 @@ export default function LookbookShell() {
               />
             ))}
           </nav>
+
+          {/* AI disclosure — tucked below dots, EU AI Act Art. 50 */}
+          <p className="mt-3 font-sans text-[7px] uppercase tracking-[0.22em] text-[#2C2A29]/35">
+            Digital Models · AI-Generated
+          </p>
         </div>
 
         {/* ── Bottom-right: arrow controls — hidden on mobile (swipe instead) */}
@@ -549,13 +554,6 @@ export default function LookbookShell() {
           >
             <ChevronRight size={16} strokeWidth={1.5} />
           </button>
-        </div>
-
-        {/* ── AI disclosure — EU AI Act Art. 50 compliance ─────────────── */}
-        <div className="absolute bottom-3 inset-x-0 z-[80] pointer-events-none flex justify-center">
-          <p className="font-sans text-[9px] uppercase tracking-[0.24em] text-[#2C2A29]/55 bg-[#EAE6DF]/60 px-3 py-1 backdrop-blur-sm">
-            Digital Models · AI-Generated Imagery
-          </p>
         </div>
 
       </motion.div>
