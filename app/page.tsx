@@ -6,7 +6,7 @@ import Footer       from "@/app/components/Footer";
 
 export default function Page() {
   return (
-    <main className="w-full min-h-screen bg-white overflow-x-hidden">
+    <main className="w-full bg-white">
 
       {/* ── Runway hero — full viewport height ─────────────────────────── */}
       <section className="relative w-full h-screen">
