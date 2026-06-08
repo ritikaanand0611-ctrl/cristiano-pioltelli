@@ -50,8 +50,7 @@ export default function NewArrivals() {
               </div>
 
               {/* Info */}
-              <p className="font-serif text-[15px] leading-snug text-[#2C2A29] mb-1">{item.name}</p>
-              <p className="font-sans text-[11px] font-bold tracking-[0.1em] text-[#2C2A29]/55">{item.price}</p>
+              <p className="font-serif text-[15px] leading-snug text-[#2C2A29]">{item.name}</p>
             </div>
           ))}
         </div>
