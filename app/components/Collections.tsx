@@ -3,16 +3,32 @@
 import { useLang } from "@/app/context/LanguageContext";
 import { useTranslations } from "@/app/translations";
 
-const TILE_HREFS = [
-  "/clothing?category=Outerwear",
-  "/clothing?category=Knitwear",
-  "/accessories",
-];
-
-const TILE_IMAGES = [
-  "/images_hero/look-06-pastoral-edge.png",
-  "/images_hero/look-04-earthen-layers.png",
-  "/images_hero/look-01-nomadic-rose.png",
+const TILES = [
+  {
+    href: "/clothing?category=Outerwear",
+    bg: "#DDD8D0",
+    images: [
+      "/clothes/Gathered-Cerulean-Duster.png",
+      "/clothes/Velvet-Ikat-Statement-Coat.png",
+      "/clothes/Structured-Peach-Zip-Jacket.png",
+    ],
+    large: true,
+  },
+  {
+    href: "/clothing?category=Knitwear",
+    bg: "#F0EBE1",
+    images: ["/clothes/Ribbed-Cream-Cardigan.png"],
+    large: false,
+  },
+  {
+    href: "/accessories",
+    bg: "#E4DDD4",
+    images: [
+      "/clothes/Artisanal-Beaded-Necklace.png",
+      "/clothes/Minimalist-Black-Leather-Boot.png",
+    ],
+    large: false,
+  },
 ];
 
 export default function Collections() {
@@ -38,26 +54,23 @@ export default function Collections() {
 
           {/* Large feature tile — spans 3 cols × 2 rows */}
           <CollectionTile
+            tile={TILES[0]}
             label={tx.tiles[0].label}
             caption={tx.tiles[0].caption}
-            image={TILE_IMAGES[0]}
-            href={TILE_HREFS[0]}
             className="md:col-span-3 md:row-span-2"
           />
 
           {/* Two smaller tiles */}
           <CollectionTile
+            tile={TILES[1]}
             label={tx.tiles[1].label}
             caption={tx.tiles[1].caption}
-            image={TILE_IMAGES[1]}
-            href={TILE_HREFS[1]}
             className="md:col-span-2 md:row-span-1"
           />
           <CollectionTile
+            tile={TILES[2]}
             label={tx.tiles[2].label}
             caption={tx.tiles[2].caption}
-            image={TILE_IMAGES[2]}
-            href={TILE_HREFS[2]}
             className="md:col-span-2 md:row-span-1"
           />
 
@@ -68,41 +81,53 @@ export default function Collections() {
 }
 
 function CollectionTile({
+  tile,
   label,
   caption,
-  image,
-  href,
   className,
 }: {
+  tile: typeof TILES[number];
   label: string;
   caption: string;
-  image: string;
-  href: string;
   className?: string;
 }) {
   return (
     <a
-      href={href}
+      href={tile.href}
+      style={{ backgroundColor: tile.bg }}
       className={[
-        "relative overflow-hidden bg-[#E8E2D9] group cursor-pointer block",
+        "relative overflow-hidden group cursor-pointer block",
         "h-[60vw] md:h-auto",
         className,
       ].join(" ")}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={image}
-        alt={label}
-        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+      {/* Clothing images — displayed side-by-side, blend into bg */}
+      <div className="absolute inset-0 flex items-end justify-center gap-0">
+        {tile.images.map((src, i) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            key={i}
+            src={src}
+            alt={label}
+            className="h-[88%] w-0 flex-1 object-contain object-bottom mix-blend-multiply transition-transform duration-700 group-hover:scale-105"
+          />
+        ))}
+      </div>
+
+      {/* Subtle vignette at bottom for text legibility */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `linear-gradient(to top, ${tile.bg}CC 0%, ${tile.bg}55 28%, transparent 60%)`,
+        }}
       />
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+
       {/* Text */}
       <div className="absolute bottom-0 left-0 p-6 md:p-8">
-        <p className="font-sans text-[9px] font-bold tracking-[0.38em] text-white/70 uppercase mb-1.5">
+        <p className="font-sans text-[9px] font-bold tracking-[0.38em] text-[#2C2A29]/50 uppercase mb-1.5">
           {caption}
         </p>
-        <h3 className="font-serif text-[1.6rem] md:text-[2rem] text-white leading-none">
+        <h3 className="font-serif text-[1.6rem] md:text-[2rem] text-[#2C2A29] leading-none">
           {label}
         </h3>
       </div>
