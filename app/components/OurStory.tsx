@@ -35,7 +35,7 @@ export default function OurStory() {
             <img
               src="/cristiano-portrait.jpeg"
               alt="Cristiano Pioltelli — Founder & Head Designer"
-              className="w-full h-full object-contain"
+              className="w-full h-full object-cover object-[65%_top]"
             />
           </div>
           <p className="mt-3 font-sans text-[8px] tracking-[0.3em] text-zinc-400 uppercase">
