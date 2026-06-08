@@ -531,10 +531,10 @@ export default function LookbookShell() {
           </button>
         </div>
 
-        {/* ── AI disclosure ────────────────────────────────────────────────── */}
-        <div className="absolute bottom-6 right-8 z-[80] pointer-events-none">
-          <p className="text-[9px] uppercase tracking-[0.2em] text-gray-400/70">
-            Digital Models / AI-Generated
+        {/* ── AI disclosure — EU AI Act Art. 50 compliance ─────────────── */}
+        <div className="absolute bottom-3 inset-x-0 z-[80] pointer-events-none flex justify-center">
+          <p className="font-sans text-[9px] uppercase tracking-[0.24em] text-[#2C2A29]/55 bg-[#EAE6DF]/60 px-3 py-1 backdrop-blur-sm">
+            Digital Models · AI-Generated Imagery
           </p>
         </div>
 
