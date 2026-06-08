@@ -357,12 +357,30 @@ export default function LookbookShell() {
   }, [goTo]);
 
   // Drag overlay handler — Framer Motion measures offset + velocity for us
+  const didDragRef = useRef(false);
+
+  function onRunwayDragStart() {
+    didDragRef.current = true;
+  }
+
   function onRunwayDragEnd(_: never, info: { offset: { x: number }; velocity: { x: number } }) {
     const { offset, velocity } = info;
     if (offset.x < -40 || velocity.x < -400) {
       goTo(activeIndexRef.current + 1); // swipe left → advance
     } else if (offset.x > 40 || velocity.x > 400) {
       goTo(activeIndexRef.current - 1); // swipe right → retreat
+    }
+  }
+
+  // Tap handler — left half goes back, right half goes forward
+  function onRunwayTap(e: React.MouseEvent<HTMLDivElement>) {
+    if (didDragRef.current) { didDragRef.current = false; return; }
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x    = e.clientX - rect.left;
+    if (x < rect.width / 2) {
+      goTo(activeIndexRef.current - 1);
+    } else {
+      goTo(activeIndexRef.current + 1);
     }
   }
 
@@ -449,7 +467,9 @@ export default function LookbookShell() {
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.1}
+          onDragStart={onRunwayDragStart}
           onDragEnd={onRunwayDragEnd}
+          onClick={onRunwayTap}
           style={{ touchAction: "pan-y" }}
         />
 
