@@ -33,7 +33,7 @@ export default function RootLayout({
       lang="en"
       className={`${cormorant.variable} ${josefin.variable} h-full antialiased`}
     >
-      <body className="h-full">
+      <body className="min-h-full">
         <CartProvider>
           {children}
           <CartDrawer />
