@@ -15,7 +15,7 @@ export default function NewArrivals() {
   const tx = useTranslations(lang).newArrivals;
 
   return (
-    <section className="bg-white py-24 md:py-32 px-8 md:px-24">
+    <section className="bg-[#F5F1EB] pt-14 pb-24 md:pt-20 md:pb-32 px-8 md:px-24">
 
       {/* Section header */}
       <div className="flex items-baseline justify-between mb-12 max-w-7xl mx-auto">

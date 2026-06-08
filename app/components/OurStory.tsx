@@ -8,7 +8,7 @@ export default function OurStory() {
   const tx = useTranslations(lang).ourStory;
 
   return (
-    <section className="bg-[#FAFAFA] py-24 md:py-32 px-8 md:px-24">
+    <section className="bg-[#F5F1EB] pt-24 pb-14 md:pt-32 md:pb-20 px-8 md:px-24">
       <div className="flex flex-col md:flex-row gap-16 md:gap-24 items-center max-w-7xl mx-auto">
 
         {/* Text side — 40% */}

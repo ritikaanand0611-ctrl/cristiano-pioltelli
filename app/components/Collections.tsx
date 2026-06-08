@@ -26,7 +26,7 @@ export default function Collections() {
   const tx = useTranslations(lang).collections;
 
   return (
-    <section className="bg-[#F5F2EE] py-24 md:py-32 px-8 md:px-24">
+    <section className="bg-[#EDEBE5] py-24 md:py-32 px-8 md:px-24" style={{ backgroundImage: "linear-gradient(to bottom, #F5F1EB 0%, #EDEBE5 80px)" }}>
       <div className="max-w-7xl mx-auto">
 
         {/* Section header */}

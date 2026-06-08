@@ -8,7 +8,7 @@ export default function Footer() {
   const tx = useTranslations(lang).footer;
 
   return (
-    <footer className="bg-[#141414] text-white py-20 px-8 md:px-24">
+    <footer className="bg-[#141414] text-white pt-20 pb-16 px-8 md:px-24" style={{ backgroundImage: "linear-gradient(to bottom, #2a2620 0%, #141414 60px)" }}>
       <div className="max-w-7xl mx-auto">
 
         {/* Top row: brand + columns */}
