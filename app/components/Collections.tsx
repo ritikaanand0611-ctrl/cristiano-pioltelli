@@ -99,7 +99,8 @@ function CollectionTile({
       <img
         src={image}
         alt={label}
-        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        style={{ objectPosition: "50% 18%" }}
       />
 
       {/* Dark gradient for text legibility */}
