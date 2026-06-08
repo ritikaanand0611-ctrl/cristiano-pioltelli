@@ -210,11 +210,11 @@ function getRunwayStyle(index: number, activeIndex: number, isMobile: boolean) {
     if (offset === 0) {
       return { x: "8vw",   y: "0%",   scale: 1.00, opacity: 1,   filter: "blur(0px)",   zIndex: 50 };
     } else if (offset === -1) {
-      return { x: "-34vw", y: "3%",   scale: 0.75, opacity: 0.9, filter: "blur(2.5px)", zIndex: 40 };
+      return { x: "-34vw", y: "0%",   scale: 0.75, opacity: 0.9, filter: "blur(2.5px)", zIndex: 40 };
     } else if (offset === -2) {
-      return { x: "-50vw", y: "6%",   scale: 0.55, opacity: 0.7, filter: "blur(6px)",   zIndex: 30 };
+      return { x: "-50vw", y: "0%",   scale: 0.55, opacity: 0.7, filter: "blur(6px)",   zIndex: 30 };
     } else if (offset === -3) {
-      return { x: "-60vw", y: "9%",   scale: 0.40, opacity: 0.4, filter: "blur(10px)",  zIndex: 20 };
+      return { x: "-60vw", y: "0%",   scale: 0.40, opacity: 0.4, filter: "blur(10px)",  zIndex: 20 };
     } else if (offset > 0) {
       return { x: "60vw",  y: "0%",   scale: 1.00, opacity: 0,   filter: "blur(0px)",   zIndex: 60 };
     } else {
@@ -433,7 +433,7 @@ export default function LookbookShell() {
                   <img
                     src={l.imagePath}
                     alt={l.title}
-                    className="w-full h-full object-contain pointer-events-none"
+                    className="w-full h-full object-contain object-bottom pointer-events-none"
                     style={l.imgFilter ? { filter: l.imgFilter } : undefined}
                     draggable={false}
                   />
