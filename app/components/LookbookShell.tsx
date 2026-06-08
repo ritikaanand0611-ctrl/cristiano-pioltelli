@@ -435,7 +435,7 @@ export default function LookbookShell() {
               exit={{    opacity: 0, y: -6 }}
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             >
-              <p className="font-sans text-[10px] font-bold tracking-[0.44em] text-[#2C2A29]/60 uppercase mb-3">
+              <p className="font-sans text-[8.5px] md:text-[10px] font-bold tracking-[0.18em] md:tracking-[0.44em] text-[#2C2A29]/60 uppercase mb-2 md:mb-3 whitespace-nowrap">
                 Spring / Summer 2025
               </p>
               <p className="font-serif text-[1.45rem] leading-tight text-[#2C2A29] mb-2">

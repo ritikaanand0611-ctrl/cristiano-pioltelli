@@ -57,9 +57,9 @@ export default function Header({ right }: HeaderProps) {
           <button
             onClick={openCart}
             aria-label="Open bag"
-            className="relative text-[#2C2A29]/50 hover:text-[#2C2A29] transition-colors"
+            className="relative text-[#2C2A29]/60 hover:text-[#2C2A29] transition-colors p-1"
           >
-            <ShoppingBag size={16} strokeWidth={1.5} />
+            <ShoppingBag size={22} strokeWidth={1.5} className="md:w-4 md:h-4" />
             {count > 0 && (
               <span className="absolute -top-1.5 -right-1.5 w-3.5 h-3.5 bg-[#2C2A29] text-white rounded-full font-sans text-[7px] font-bold flex items-center justify-center leading-none">
                 {count}
