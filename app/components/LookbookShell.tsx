@@ -375,7 +375,7 @@ export default function LookbookShell() {
   );
 
   return (
-    <div className="flex flex-col h-screen w-full bg-white overflow-hidden">
+    <div className="flex flex-col h-full w-full bg-white overflow-hidden">
 
       <Header right={lookCounter} />
 
