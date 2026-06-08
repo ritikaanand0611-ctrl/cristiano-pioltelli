@@ -336,7 +336,7 @@ export default function LookbookShell() {
   const look = LOOKS[activeIndex];
 
   const lookCounter = (
-    <span className="font-sans text-[10px] tracking-[0.32em] text-[#2C2A29]/40 uppercase tabular-nums">
+    <span className="hidden md:inline font-sans text-[10px] tracking-[0.32em] text-[#2C2A29]/40 uppercase tabular-nums">
       {String(activeIndex + 1).padStart(2, "0")}&nbsp;/&nbsp;{String(LOOKS.length).padStart(2, "0")}
     </span>
   );
