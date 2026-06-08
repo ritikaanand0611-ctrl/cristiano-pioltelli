@@ -192,17 +192,17 @@ function getRunwayStyle(index: number, activeIndex: number, isMobile: boolean) {
 
   if (isMobile) {
     if (offset === 0) {
-      return { x: "0vw",   y: "0%",   scale: 1.00, opacity: 1,   filter: "blur(0px)",   zIndex: 50 };
+      return { x: "8vw",   y: "0%",   scale: 1.00, opacity: 1,   filter: "blur(0px)",   zIndex: 50 };
     } else if (offset === -1) {
-      return { x: "-22vw", y: "3%",   scale: 0.75, opacity: 0.9, filter: "blur(2.5px)", zIndex: 40 };
+      return { x: "-14vw", y: "3%",   scale: 0.75, opacity: 0.9, filter: "blur(2.5px)", zIndex: 40 };
     } else if (offset === -2) {
-      return { x: "-38vw", y: "6%",   scale: 0.55, opacity: 0.7, filter: "blur(6px)",   zIndex: 30 };
+      return { x: "-30vw", y: "6%",   scale: 0.55, opacity: 0.7, filter: "blur(6px)",   zIndex: 30 };
     } else if (offset === -3) {
-      return { x: "-48vw", y: "9%",   scale: 0.40, opacity: 0.4, filter: "blur(10px)",  zIndex: 20 };
+      return { x: "-40vw", y: "9%",   scale: 0.40, opacity: 0.4, filter: "blur(10px)",  zIndex: 20 };
     } else if (offset > 0) {
       return { x: "60vw",  y: "0%",   scale: 1.00, opacity: 0,   filter: "blur(0px)",   zIndex: 60 };
     } else {
-      return { x: "-55vw", y: "12%",  scale: 0.25, opacity: 0,   filter: "blur(14px)",  zIndex: 10 };
+      return { x: "-48vw", y: "12%",  scale: 0.25, opacity: 0,   filter: "blur(14px)",  zIndex: 10 };
     }
   }
 
@@ -404,7 +404,7 @@ export default function LookbookShell() {
         />
 
         {/* ── Top-left overlay: season + description ─────────────────────── */}
-        <div className="absolute top-10 left-10 z-[80] max-w-[22ch] pointer-events-none select-none">
+        <div className="absolute top-10 left-0 z-[80] w-[55%] md:w-full pl-4 md:pl-10 md:max-w-[22ch] pointer-events-none select-none">
           <AnimatePresence mode="wait">
             <motion.div
               key={look.id + "-tl"}
@@ -419,7 +419,7 @@ export default function LookbookShell() {
               <p className="font-serif text-[1.45rem] leading-tight text-[#2C2A29] mb-2">
                 {look.title}
               </p>
-              <p className="font-sans text-[0.78rem] font-semibold leading-relaxed text-[#2C2A29]/75">
+              <p className="font-sans text-[0.68rem] md:text-[0.78rem] font-semibold leading-relaxed text-[#2C2A29]/75">
                 {look.description}
               </p>
             </motion.div>
