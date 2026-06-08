@@ -239,6 +239,39 @@ function getRunwayStyle(index: number, activeIndex: number, isMobile: boolean) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// ShopFullLookButton — adds every item in the current look to the cart at once
+// ─────────────────────────────────────────────────────────────────────────────
+function ShopFullLookButton({ items }: { items: LookItem[] }) {
+  const { addItem, openCart } = useCart();
+  const [done, setDone] = useState(false);
+
+  function handleShopFull() {
+    items.forEach((item) =>
+      addItem({ id: item.id, name: item.name, category: item.category, price: item.price, imagePath: item.imagePath, swatch: item.swatch })
+    );
+    openCart();
+    setDone(true);
+    setTimeout(() => setDone(false), 2000);
+  }
+
+  return (
+    <div className="flex-shrink-0 px-10 py-7 border-t border-[#EAE6DF]">
+      <button
+        onClick={handleShopFull}
+        className={[
+          "w-full border py-3.5 font-sans text-[9px] tracking-[0.36em] uppercase transition-all duration-300",
+          done
+            ? "bg-[#2C2A29] text-[#FDFBF7] border-[#2C2A29]"
+            : "border-[#2C2A29]/55 text-[#2C2A29] hover:bg-[#2C2A29] hover:text-[#FDFBF7]",
+        ].join(" ")}
+      >
+        {done ? "Added to Bag ✓" : "Shop Full Look"}
+      </button>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // LookbookShell — main layout
 // ─────────────────────────────────────────────────────────────────────────────
 export default function LookbookShell() {
@@ -538,11 +571,7 @@ export default function LookbookShell() {
           </AnimatePresence>
         </div>
 
-        <div className="flex-shrink-0 px-10 py-7 border-t border-[#EAE6DF]">
-          <button className="w-full border border-[#2C2A29]/55 py-3.5 font-sans text-[9px] tracking-[0.36em] text-[#2C2A29] uppercase transition-all duration-300 hover:bg-[#2C2A29] hover:text-[#FDFBF7]">
-            Shop Full Look
-          </button>
-        </div>
+        <ShopFullLookButton items={look.items} />
       </div>
 
       </main>
