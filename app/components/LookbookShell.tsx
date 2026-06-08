@@ -387,7 +387,7 @@ export default function LookbookShell() {
           ══════════════════════════════════════════════════════════════════════ */}
       <motion.div
         ref={paneRef}
-        className="relative w-full md:w-[70%] h-[70vh] md:h-full flex items-center justify-center overflow-hidden select-none bg-[#DAE4EE]"
+        className="relative w-full md:w-[70%] h-[70vh] md:h-full flex items-center justify-center overflow-hidden select-none bg-[#EAE6DF]"
       >
         {/* ── Models ─────────────────────────────────────────────────────── */}
         {paneW > 0 &&
@@ -446,7 +446,7 @@ export default function LookbookShell() {
         {/* ── Mobile text veil: fades runway bg over text zone so copy is legible */}
         <div
           className="absolute inset-y-0 left-0 w-[52%] z-[65] pointer-events-none md:hidden"
-          style={{ background: "linear-gradient(to right, #DAE4EE 55%, transparent)" }}
+          style={{ background: "linear-gradient(to right, #EAE6DF 55%, transparent)" }}
         />
 
         {/* ── Invisible drag overlay — above models (max z:60), below UI (z:80+) */}
