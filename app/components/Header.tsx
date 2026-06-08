@@ -5,13 +5,8 @@ import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 import { ShoppingBag } from "lucide-react";
 import { useCart } from "@/app/context/CartContext";
-
-const NAV_LINKS = [
-  // { label: "COLLECTIONS", href: "/collections" }, // hidden — same images as Lookbook
-  { label: "CLOTHING",    href: "/clothing"    },
-  { label: "LOOKBOOK",    href: "/lookbook"    },
-  { label: "ACCESSORIES", href: "/accessories" },
-] as const;
+import { useLang } from "@/app/context/LanguageContext";
+import { useTranslations } from "@/app/translations";
 
 interface HeaderProps {
   right?: ReactNode;
@@ -21,11 +16,19 @@ export default function Header({ right }: HeaderProps) {
   const pathname = usePathname();
   const isHero   = pathname === "/";
   const { count, openCart } = useCart();
+  const { lang, setLang } = useLang();
+  const tx = useTranslations(lang);
+
+  const NAV_LINKS = [
+    { label: tx.nav.clothing,    href: "/clothing"    },
+    { label: tx.nav.lookbook,    href: "/lookbook"    },
+    { label: tx.nav.accessories, href: "/accessories" },
+  ];
 
   return (
     <header className={`flex-shrink-0 bg-white${isHero ? "" : " border-b border-[#DDD5C8]"}`}>
 
-      {/* ── Row 1: brand  |  RUNWAY (bold hero link)  |  right slot ── */}
+      {/* ── Row 1: brand  |  RUNWAY  |  lang toggle + bag ── */}
       <div className="grid grid-cols-3 items-center px-4 md:px-10 py-4">
 
         {/* Left — brand */}
@@ -51,9 +54,37 @@ export default function Header({ right }: HeaderProps) {
           </Link>
         </div>
 
-        {/* Right — look counter + bag icon */}
+        {/* Right — language toggle + bag icon */}
         <div className="flex items-center justify-end gap-4">
           {right}
+
+          {/* EN | IT toggle */}
+          <div className="flex items-center gap-1.5 font-sans text-[9px] tracking-[0.22em] font-bold uppercase select-none">
+            <button
+              onClick={() => setLang("en")}
+              aria-label="Switch to English"
+              className={`transition-colors ${
+                lang === "en"
+                  ? "text-[#2C2A29]"
+                  : "text-[#2C2A29]/30 hover:text-[#2C2A29]/60"
+              }`}
+            >
+              EN
+            </button>
+            <span className="text-[#2C2A29]/20 font-light">|</span>
+            <button
+              onClick={() => setLang("it")}
+              aria-label="Switch to Italian"
+              className={`transition-colors ${
+                lang === "it"
+                  ? "text-[#2C2A29]"
+                  : "text-[#2C2A29]/30 hover:text-[#2C2A29]/60"
+              }`}
+            >
+              IT
+            </button>
+          </div>
+
           <button
             onClick={openCart}
             aria-label="Open bag"
@@ -78,7 +109,7 @@ export default function Header({ right }: HeaderProps) {
           const isActive = pathname === href;
           return (
             <Link
-              key={label}
+              key={href}
               href={href}
               className={[
                 "font-sans text-[10px] tracking-[0.32em] uppercase font-bold transition-colors",

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Josefin_Sans } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/app/context/CartContext";
+import { LanguageProvider } from "@/app/context/LanguageContext";
 import CartDrawer from "@/app/components/CartDrawer";
 
 const cormorant = Cormorant_Garamond({
@@ -34,10 +35,12 @@ export default function RootLayout({
       className={`${cormorant.variable} ${josefin.variable} h-full antialiased`}
     >
       <body className="min-h-full">
-        <CartProvider>
-          {children}
-          <CartDrawer />
-        </CartProvider>
+        <LanguageProvider>
+          <CartProvider>
+            {children}
+            <CartDrawer />
+          </CartProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

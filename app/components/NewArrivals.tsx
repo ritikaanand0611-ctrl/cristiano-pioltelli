@@ -1,3 +1,8 @@
+"use client";
+
+import { useLang } from "@/app/context/LanguageContext";
+import { useTranslations } from "@/app/translations";
+
 const ARRIVALS = [
   { id: "a1", name: "Emerald Silk-Blend Trench", price: "$380", image: "/clothes/Emerald-Silk-Blend-Trench.png",     bg: "#D6E8DF" },
   { id: "a2", name: "Velvet Ikat Statement Coat", price: "$450", image: "/clothes/Velvet-Ikat-Statement-Coat.png",   bg: "#E2D6C8" },
@@ -6,17 +11,20 @@ const ARRIVALS = [
 ];
 
 export default function NewArrivals() {
+  const { lang } = useLang();
+  const tx = useTranslations(lang).newArrivals;
+
   return (
     <section className="bg-white py-24 md:py-32 px-8 md:px-24">
 
       {/* Section header */}
       <div className="flex items-baseline justify-between mb-12 max-w-7xl mx-auto">
-        <h2 className="font-serif text-[2rem] md:text-[2.6rem] text-[#2C2A29]">New Arrivals</h2>
+        <h2 className="font-serif text-[2rem] md:text-[2.6rem] text-[#2C2A29]">{tx.heading}</h2>
         <a
           href="/clothing"
           className="font-sans text-[9px] font-bold tracking-[0.34em] text-[#2C2A29]/45 uppercase hover:text-[#2C2A29] transition-colors"
         >
-          View All
+          {tx.viewAll}
         </a>
       </div>
 
