@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import Header from "@/app/components/Header";
+import { useCart } from "@/app/context/CartContext";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Mock Data  (inline — swap `gradient` for a real <img> src when photos arrive)
@@ -121,6 +122,15 @@ const GRAIN =
 // ─────────────────────────────────────────────────────────────────────────────
 function ItemRow({ item }: { item: LookItem }) {
   const [wished, setWished] = useState(false);
+  const [added, setAdded]   = useState(false);
+  const { addItem } = useCart();
+
+  function handleAdd() {
+    addItem({ id: item.id, name: item.name, category: item.category, price: item.price, imagePath: item.imagePath, swatch: item.swatch });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1500);
+  }
+
   return (
     <div className="flex items-start gap-4 group">
       {/* Square product thumbnail */}
@@ -164,8 +174,14 @@ function ItemRow({ item }: { item: LookItem }) {
           />
         </button>
         <button
+          onClick={handleAdd}
           aria-label="Add to bag"
-          className="w-[22px] h-[22px] border border-[#2C2A29]/28 flex items-center justify-center text-[#2C2A29]/45 hover:bg-[#2C2A29] hover:text-white hover:border-transparent transition-all"
+          className={[
+            "w-[22px] h-[22px] border flex items-center justify-center transition-all",
+            added
+              ? "bg-[#2C2A29] border-[#2C2A29] text-white"
+              : "border-[#2C2A29]/28 text-[#2C2A29]/45 hover:bg-[#2C2A29] hover:text-white hover:border-transparent",
+          ].join(" ")}
         >
           <Plus size={11} strokeWidth={1.5} />
         </button>

@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
+import { ShoppingBag } from "lucide-react";
+import { useCart } from "@/app/context/CartContext";
 
 const NAV_LINKS = [
   // { label: "COLLECTIONS", href: "/collections" }, // hidden — same images as Lookbook
@@ -18,6 +20,7 @@ interface HeaderProps {
 export default function Header({ right }: HeaderProps) {
   const pathname = usePathname();
   const isHero   = pathname === "/";
+  const { count, openCart } = useCart();
 
   return (
     <header className={`flex-shrink-0 bg-white${isHero ? "" : " border-b border-[#DDD5C8]"}`}>
@@ -48,8 +51,22 @@ export default function Header({ right }: HeaderProps) {
           </Link>
         </div>
 
-        {/* Right — injected slot (look counter, etc.) */}
-        <div className="flex justify-end">{right}</div>
+        {/* Right — look counter + bag icon */}
+        <div className="flex items-center justify-end gap-4">
+          {right}
+          <button
+            onClick={openCart}
+            aria-label="Open bag"
+            className="relative text-[#2C2A29]/50 hover:text-[#2C2A29] transition-colors"
+          >
+            <ShoppingBag size={16} strokeWidth={1.5} />
+            {count > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 w-3.5 h-3.5 bg-[#2C2A29] text-white rounded-full font-sans text-[7px] font-bold flex items-center justify-center leading-none">
+                {count}
+              </span>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* ── Row 2: category sub-navigation ── */}
