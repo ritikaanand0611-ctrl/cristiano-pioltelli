@@ -427,7 +427,7 @@ export default function LookbookShell() {
         </div>
 
         {/* ── Bottom-left overlay: look number + title + dots ────────────── */}
-        <div className="absolute bottom-10 left-10 z-[80] pointer-events-none select-none">
+        <div className="absolute bottom-10 left-4 md:left-10 z-[80] pointer-events-none select-none w-[40%] md:w-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={look.id + "-bl"}
@@ -436,11 +436,10 @@ export default function LookbookShell() {
               exit={{    opacity: 0, y: -6 }}
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             >
-              {/* Large bold look label — matches "LOOK 15" in the Marc Jacobs reference */}
-              <h2 className="font-sans text-[2.8rem] font-bold tracking-[0.06em] leading-none text-[#2C2A29] uppercase">
+              <h2 className="font-sans text-[1.5rem] md:text-[2.8rem] font-bold tracking-[0.06em] leading-none text-[#2C2A29] uppercase">
                 {look.label}
               </h2>
-              <button className="mt-2 pointer-events-auto font-sans text-[9px] font-bold tracking-[0.38em] text-[#2C2A29]/50 uppercase hover:text-[#2C2A29] transition-colors">
+              <button className="mt-1 md:mt-2 pointer-events-auto font-sans text-[8px] md:text-[9px] font-bold tracking-[0.38em] text-[#2C2A29]/50 uppercase hover:text-[#2C2A29] transition-colors">
                 Shop the Look
               </button>
             </motion.div>
