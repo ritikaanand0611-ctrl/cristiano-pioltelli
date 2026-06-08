@@ -26,7 +26,7 @@ export default function Header({ right }: HeaderProps) {
   ];
 
   return (
-    <header className={`flex-shrink-0 bg-white${isHero ? "" : " border-b border-[#DDD5C8]"}`}>
+    <header className={`flex-shrink-0 ${isHero ? "bg-[#EAE6DF]" : "bg-white border-b border-[#DDD5C8]"}`}>
 
       {/* ── Row 1: brand  |  RUNWAY  |  lang toggle + bag ── */}
       <div className="grid grid-cols-3 items-center px-4 md:px-10 py-4">

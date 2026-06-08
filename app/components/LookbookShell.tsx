@@ -375,7 +375,7 @@ export default function LookbookShell() {
   );
 
   return (
-    <div className="flex flex-col h-full w-full bg-white overflow-hidden">
+    <div className="flex flex-col h-full w-full bg-[#EAE6DF] overflow-hidden">
 
       <Header right={lookCounter} />
 
@@ -549,7 +549,7 @@ export default function LookbookShell() {
       {/* ══════════════════════════════════════════════════════════════════════
           RIGHT PANE — Outfit Breakdown  (30 %)
           ══════════════════════════════════════════════════════════════════════ */}
-      <div className="w-full md:w-[30%] h-auto md:h-full flex flex-col border-t md:border-t-0 md:border-l border-[#DDD5C8] bg-white overflow-hidden">
+      <div className="w-full md:w-[30%] h-auto md:h-full flex flex-col border-t md:border-t-0 md:border-l border-[#D4CEC6] bg-[#F5F1EB] overflow-hidden">
 
         <div className="flex-1 overflow-y-auto px-10 pt-8 md:pt-8">
           <p className="font-sans text-[8.5px] font-bold tracking-[0.44em] text-[#2C2A29]/60 uppercase mb-7">
