@@ -368,16 +368,10 @@ export default function LookbookShell() {
 
   const look = LOOKS[activeIndex];
 
-  const lookCounter = (
-    <span className="hidden md:inline font-sans text-[10px] tracking-[0.32em] text-[#2C2A29]/40 uppercase tabular-nums">
-      {String(activeIndex + 1).padStart(2, "0")}&nbsp;/&nbsp;{String(LOOKS.length).padStart(2, "0")}
-    </span>
-  );
-
   return (
     <div className="flex flex-col h-full w-full bg-[#EAE6DF] overflow-hidden">
 
-      <Header right={lookCounter} />
+      <Header />
 
       {/* 70/30 split — stacks vertically on mobile */}
       <main className="flex flex-col md:flex-row w-full min-h-0 flex-1 overflow-hidden">
