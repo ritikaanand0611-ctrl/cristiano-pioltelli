@@ -23,7 +23,7 @@ export default function Header({ right }: HeaderProps) {
     <header className={`flex-shrink-0 bg-white${isHero ? "" : " border-b border-[#DDD5C8]"}`}>
 
       {/* ── Row 1: brand  |  RUNWAY (bold hero link)  |  right slot ── */}
-      <div className="grid grid-cols-3 items-center px-10 py-4">
+      <div className="grid grid-cols-3 items-center px-4 md:px-10 py-4">
 
         {/* Left — brand */}
         <Link
