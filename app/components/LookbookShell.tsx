@@ -456,6 +456,7 @@ export default function LookbookShell() {
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.1}
           onDragEnd={onRunwayDragEnd}
+          style={{ touchAction: "pan-y" }}
         />
 
         {/* ── Top-left overlay: season + description ─────────────────────── */}
